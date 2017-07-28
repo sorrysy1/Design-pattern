@@ -34,6 +34,12 @@ private:
 
 const Singleton *Singleton ::m_Instance = new Singleton();
 
+int main(int argc , char *argv [])
+{
+	Singleton *singletonObj = Singleton ::GetInstance();
+	cout<<singletonObj->GetTest()<<endl;
+	Singleton ::DestoryInstance();
+}
 //非new出来的单例
 class Singleton
 {
@@ -53,7 +59,14 @@ private:
 	Singleton(){ m_Test = 10; };
 	int m_Test;
 };
+int main(int argc , char *argv [])
+{
+	Singleton *singletonObj = Singleton ::GetInstance();
+	cout<<singletonObj->GetTest()<<endl;
 
+	singletonObj = Singleton ::GetInstance();
+	cout<<singletonObj->GetTest()<<endl;
+}
 
 //继承并在子类析构中释放单例本身
 class Singleton
@@ -92,4 +105,13 @@ private:
 	static GC gc;
 };
 
+Singleton *Singleton ::m_Instance = new Singleton();
+Singleton ::GC Singleton ::gc;
 
+int main(int argc , char *argv [])
+{
+	Singleton *singletonObj = Singleton ::GetInstance();
+	cout<<singletonObj->GetTest()<<endl;
+
+	return 0;
+}
